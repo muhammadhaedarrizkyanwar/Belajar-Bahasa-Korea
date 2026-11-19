@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 <title>Latihan | Kkuljaem Korea</title>
-</head><body><div class="wrap">
+<style>html:not(.siap) .wrap{display:none}html.siap #gate{display:none}</style><script>if(location.protocol==="file:")document.documentElement.classList.add("siap");setTimeout(function(){var g=document.getElementById("gate");if(g&&!document.documentElement.classList.contains("siap"))g.textContent="Login tidak bisa dimuat. Cek koneksi internet dan isi config.js."},6000)</script></head><body><p id="gate" style="padding:24px;font-weight:600">Memeriksa login...</p><div class="wrap">
 <nav><a class="logo" href="index.html">Kkuljaem Korea</a><div><a href="index.html">Beranda</a><a href="belajar.html">Belajar</a><a href="latihan.html" aria-current="page">Latihan</a></div></nav>
 <section><h2>Latihan soal</h2><p class="sub">10 soal acak dibuat dari isi pelajaran. Pilih pelajaran yang mau diuji.</p>
 <div class="filters"><label for="pil">Pelajaran:</label><select id="pil"></select></div>
@@ -36,4 +36,4 @@ info.appendChild(el("div","bahas",(k===s.jawab?"Benar. ":"Kurang tepat. ")+s.k+"
 var n=el("button","btn",i+1===S.length?"Lihat skor":"Soal berikutnya");n.onclick=function(){i++;tampil()};info.appendChild(n);n.focus()};q.appendChild(b)});
 q.appendChild(info);area.appendChild(q)}
 mulai();
-</script></body></html>
+</script><script type="module" src="auth.js"></script></body></html>

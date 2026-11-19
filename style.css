@@ -54,3 +54,6 @@ select{font:500 16px "Instrument Sans";padding:9px 14px;border:2px solid var(--i
 .skor{font:800 64px "Bricolage Grotesque";margin:0}
 .empty{padding:20px;border:2px dashed var(--ink);border-radius:14px}
 footer{padding:40px 0 60px;font-size:15px;opacity:.85}
+.out{margin-left:16px;font:600 15px "Instrument Sans";color:var(--ink);background:none;border:2px solid var(--ink);border-radius:999px;padding:2px 12px;cursor:pointer}
+.login{max-width:460px;margin:60px auto}
+#pesan{min-height:1.6em;margin-top:14px;font-weight:600}

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
 <title>Belajar | Kkuljaem Korea</title>
-</head><body><div class="wrap">
+<style>html:not(.siap) .wrap{display:none}html.siap #gate{display:none}</style><script>if(location.protocol==="file:")document.documentElement.classList.add("siap");setTimeout(function(){var g=document.getElementById("gate");if(g&&!document.documentElement.classList.contains("siap"))g.textContent="Login tidak bisa dimuat. Cek koneksi internet dan isi config.js."},6000)</script></head><body><p id="gate" style="padding:24px;font-weight:600">Memeriksa login...</p><div class="wrap">
 <nav><a class="logo" href="index.html">Kkuljaem Korea</a><div><a href="index.html">Beranda</a><a href="belajar.html" aria-current="page">Belajar</a><a href="latihan.html">Latihan</a></div></nav>
 <div class="layout"><aside class="menu" id="menu"></aside><main class="lesson" id="pel"></main></div>
 <footer>Tombol 🔊 memakai suara Korea bawaan perangkatmu. Jika tidak bersuara, pasang paket suara Korea di pengaturan HP/komputer.</footer></div>
@@ -35,4 +35,4 @@ if(PELAJARAN[i+1]){var nx=el("a","btn alt","Berikutnya →");nx.href="#"+PELAJAR
 pel.appendChild(ac)}
 window.addEventListener("hashchange",function(){tampil();window.scrollTo(0,0)});
 tampil();
-</script></body></html>
+</script><script type="module" src="auth.js"></script></body></html>
