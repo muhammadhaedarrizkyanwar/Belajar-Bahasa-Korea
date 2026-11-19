@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<title>Latihan soal | mw belajar...</title>
+</head><body><div class="wrap">
+<nav><a class="logo" href="index.html">mw belajar...</a><div><a href="index.html">Beranda</a><a href="latihan.html" aria-current="page">Latihan soal</a></div></nav>
+<section><h2>Latihan soal</h2><p class="sub">Pilih jalur, jawab, lalu baca pembahasannya.</p>
+<div class="filters" id="filters" role="group" aria-label="Pilih jalur"></div>
+<div id="area"></div></section></div>
+<script src="data.js"></script>
+<script>
+const filters=document.getElementById("filters"),area=document.getElementById("area");
+const options=["Semua",...new Set(SOAL.map(s=>s.jalur))];
+let jalur=new URLSearchParams(location.search).get("jalur");if(!options.includes(jalur))jalur="Semua";
+let soal=[],i=0,skor=0;
+function mulai(){soal=SOAL.filter(s=>jalur==="Semua"||s.jalur===jalur);i=0;skor=0;tab();tampil()}
+function tab(){filters.innerHTML="";options.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.setAttribute("aria-pressed",o===jalur);b.onclick=()=>{jalur=o;mulai()};filters.appendChild(b)})}
+function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+function tampil(){area.innerHTML="";
+if(!soal.length){area.appendChild(el("div","empty","Belum ada soal di jalur ini."));return}
+if(i>=soal.length){const q=el("div","quiz");q.append(el("p","","Skor kamu"),el("p","skor",skor+" / "+soal.length));
+const b=el("button","btn","Ulangi");b.onclick=mulai;q.append(b);area.appendChild(q);return}
+const s=soal[i],q=el("div","quiz");
+q.append(el("span","tag",s.jalur+" · soal "+(i+1)+" dari "+soal.length),el("h3","",s.tanya));
+const info=el("div");
+s.opsi.forEach((o,k)=>{const b=el("button","opt",o);b.onclick=()=>{
+q.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===s.jawab)x.classList.add("benar");else if(j===k)x.classList.add("salah")});
+if(k===s.jawab)skor++;
+info.append(el("div","bahas",(k===s.jawab?"Benar. ":"Kurang tepat. ")+s.bahas));
+const n=el("button","btn",i+1===soal.length?"Lihat skor":"Soal berikutnya");n.onclick=()=>{i++;tampil()};info.append(n);n.focus()};q.appendChild(b)});
+q.appendChild(info);area.appendChild(q)}
+mulai();
+</script></body></html>

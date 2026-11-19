@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<title>mw belajar...</title>
+<meta name="description" content="Mau belajar PAS? SNBT? TKA? Ayo kesini!">
+</head><body><div class="wrap">
+<nav><a class="logo" href="index.html">mw belajar...</a><div><a href="index.html" aria-current="page">Beranda</a><a href="latihan.html">Latihan soal</a></div></nav>
+<header class="hero"><h1>Mau belajar <span class="mark">PAS</span>? SNBT? TKA?</h1>
+<p>Ringkasan materi dan latihan soal, dikumpulkan di satu tempat. Pilih jalurmu, lalu mulai.</p>
+<a class="btn" href="latihan.html">Coba latihan soal</a></header>
+<section id="jalur"><h2>Pilih jalur belajar</h2><p class="sub">Tiga tujuan, tiga cara belajar yang berbeda.</p>
+<div class="tracks">
+<a class="track" href="latihan.html?jalur=PAS"><h3>PAS</h3><p>Penilaian akhir semester: materi kelas yang diujikan di sekolah.</p></a>
+<a class="track" href="latihan.html?jalur=SNBT"><h3>SNBT</h3><p>Tes masuk PTN: penalaran, literasi, dan pengetahuan kuantitatif.</p></a>
+<a class="track" href="latihan.html?jalur=TKA"><h3>TKA</h3><p>Tes kemampuan akademik: mata pelajaran wajib dan pilihan.</p></a>
+</div></section>
+<section id="materi"><h2>Materi</h2><p class="sub">Saring berdasarkan jalur.</p>
+<div class="filters" id="filters" role="group" aria-label="Saring materi"></div><div class="list" id="list"></div></section>
+<footer>Dibuat untuk belajar bareng. Semoga lancar ujiannya!</footer></div>
+<script src="data.js"></script>
+<script>
+const filters=document.getElementById("filters"),list=document.getElementById("list");
+const options=["Semua",...new Set(MATERI.map(m=>m.jalur))];let aktif="Semua";
+function render(){filters.innerHTML="";
+options.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.setAttribute("aria-pressed",o===aktif);b.onclick=()=>{aktif=o;render()};filters.appendChild(b)});
+const data=MATERI.filter(m=>aktif==="Semua"||m.jalur===aktif);
+list.innerHTML=data.length?"":'<div class="empty">Belum ada materi di jalur ini.</div>';
+data.forEach(m=>{const a=document.createElement("a");a.className="item";a.href=m.url;
+a.innerHTML='<span><b></b><small></small></span><span class="tag"></span>';
+a.querySelector("b").textContent=m.judul;a.querySelector("small").textContent=m.ket;a.querySelector(".tag").textContent=m.jalur;list.appendChild(a)})}
+render();
+</script></body></html>
