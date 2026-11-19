@@ -1,43 +1,56 @@
-:root{--paper:#f3f6fd;--ink:#1b2a6b;--line:#c9d4f0;--hi:#ffe45c;--pink:#ff9ebf;--mint:#a9ecd0;--card:#fff}
+:root{--paper:#fff8e7;--ink:#2a1f4d;--line:#f0dfae;--hi:#ffd23f;--pink:#ff9ebf;--mint:#a9ecd0;--card:#fff}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{margin:0;font:400 17px/1.6 "Instrument Sans",system-ui,sans-serif;color:var(--ink);background:var(--paper);background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 32px}
-h1,h2,h3{font-family:"Bricolage Grotesque",sans-serif;line-height:1.05;margin:0}
+body{margin:0;font:400 17px/1.6 "Instrument Sans","Noto Sans KR",system-ui,sans-serif;color:var(--ink);background:var(--paper);background-image:linear-gradient(var(--line) 1px,transparent 1px);background-size:100% 32px}
+h1,h2,h3{font-family:"Bricolage Grotesque","Noto Sans KR",sans-serif;line-height:1.1;margin:0}
 a{color:inherit}
 :focus-visible{outline:3px solid var(--ink);outline-offset:3px}
-.wrap{max-width:960px;margin:0 auto;padding:0 20px}
-nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-weight:600}
-nav a{text-decoration:none;margin-left:18px}
+.wrap{max-width:980px;margin:0 auto;padding:0 20px}
+nav{display:flex;justify-content:space-between;align-items:center;padding:20px 0;font-weight:600;flex-wrap:wrap;gap:8px}
+nav a{text-decoration:none;margin-left:16px}
 nav a[aria-current]{background:var(--hi);padding:2px 8px;border-radius:6px}
-.logo{font:800 22px "Bricolage Grotesque";margin:0;text-decoration:none}
-.hero{padding:56px 0 72px}
-.hero h1{font-size:clamp(44px,9vw,92px);font-weight:800;max-width:11ch}
+.logo{font:800 22px "Bricolage Grotesque";margin:0!important;text-decoration:none}
+.hero{padding:48px 0 56px}
+.hero small{font:600 20px "Noto Sans KR"}
+.hero h1{font-size:clamp(44px,9vw,88px);font-weight:800;margin:6px 0}
 .mark{background:var(--hi);padding:0 .12em}
-.hero p{max-width:46ch;font-size:19px;margin:20px 0 28px}
-.btn{display:inline-block;background:var(--ink);color:#fff;border:0;font:600 17px "Instrument Sans";text-decoration:none;cursor:pointer;padding:14px 24px;border-radius:12px;box-shadow:4px 4px 0 var(--pink);transition:transform .15s,box-shadow .15s}
+.hero p{max-width:48ch;font-size:19px;margin:16px 0 26px}
+.btn{display:inline-block;background:var(--ink);color:#fff;border:0;font:600 17px "Instrument Sans";text-decoration:none;cursor:pointer;padding:13px 22px;border-radius:12px;box-shadow:4px 4px 0 var(--pink);transition:transform .15s,box-shadow .15s}
 .btn:hover{transform:translate(2px,2px);box-shadow:2px 2px 0 var(--pink)}
-section{padding:40px 0}
-h2{font-size:clamp(28px,5vw,42px);margin-bottom:8px}
-.sub{margin:0 0 24px;max-width:52ch}
-.tracks{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
-.track{border:2px solid var(--ink);border-radius:18px;padding:22px;text-decoration:none;display:block}
-.track:nth-child(1){background:var(--hi)}.track:nth-child(2){background:var(--pink)}.track:nth-child(3){background:var(--mint)}
-.track h3{font-size:34px;margin-bottom:6px}.track p{margin:0}
-.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
-.filters button{font:600 15px "Instrument Sans";border:2px solid var(--ink);background:var(--card);color:var(--ink);border-radius:999px;padding:7px 16px;cursor:pointer}
-.filters button[aria-pressed="true"]{background:var(--ink);color:#fff}
-.list{display:grid;gap:12px}
-.item{display:flex;justify-content:space-between;gap:16px;align-items:center;background:var(--card);border:2px solid var(--line);border-radius:14px;padding:14px 18px;text-decoration:none}
-.item:hover{border-color:var(--ink)}
-.item b{display:block}.item small{opacity:.75}
-.tag{flex:none;font-weight:600;font-size:14px;border:2px solid var(--ink);border-radius:999px;padding:2px 12px}
-.empty{padding:20px;border:2px dashed var(--line);border-radius:14px}
+.btn.alt{background:var(--card);color:var(--ink);border:2px solid var(--ink)}
+section{padding:34px 0}
+h2{font-size:clamp(28px,5vw,40px);margin-bottom:8px}
+.sub{margin:0 0 22px;max-width:56ch}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:16px}
+.card{border:2px solid var(--ink);border-radius:18px;padding:20px;background:var(--card)}
+.card:nth-child(1){background:var(--hi)}.card:nth-child(2){background:var(--pink)}.card:nth-child(3){background:var(--mint)}
+.card h3{font-size:24px;margin-bottom:6px}.card p{margin:0}
+.card b{font:800 14px "Instrument Sans";letter-spacing:.04em}
+.bar{height:16px;border:2px solid var(--ink);border-radius:999px;background:#fff;overflow:hidden;margin:10px 0 16px}
+.bar i{display:block;height:100%;background:var(--pink);transition:width .4s}
+.layout{display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start}
+@media(max-width:760px){.layout{grid-template-columns:1fr}}
+.menu{background:var(--card);border:2px solid var(--ink);border-radius:16px;padding:12px}
+.lv{font:800 13px "Instrument Sans";letter-spacing:.05em;margin:10px 6px 4px;text-transform:uppercase}
+.mi{display:block;width:100%;text-align:left;font:500 16px "Instrument Sans";color:var(--ink);background:none;border:0;border-radius:8px;padding:7px 10px;cursor:pointer}
+.mi:hover{background:var(--paper)}.mi[aria-current]{background:var(--hi);font-weight:600}
+.lesson ul{margin:12px 0;padding-left:20px}
+.scroll{overflow-x:auto;margin:16px 0}
+.tbl{width:100%;border-collapse:collapse;background:var(--card);border:2px solid var(--ink)}
+.tbl th{text-align:left;background:var(--hi);padding:8px 14px;font-size:14px}
+.tbl td{padding:9px 14px;border-top:1px solid var(--line)}
+.kor{font:700 24px "Noto Sans KR",sans-serif;white-space:nowrap}
+.say{border:0;background:var(--hi);border-radius:8px;cursor:pointer;padding:2px 8px;margin-left:8px;font-size:15px}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:20px}
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;align-items:center}
+select{font:500 16px "Instrument Sans";padding:9px 14px;border:2px solid var(--ink);border-radius:10px;background:var(--card);color:var(--ink)}
 .quiz{background:var(--card);border:2px solid var(--ink);border-radius:18px;padding:24px;max-width:640px}
-.quiz h3{font-size:26px;margin:6px 0 18px;line-height:1.2}
+.quiz h3{font-size:34px;margin:8px 0 18px;font-family:"Noto Sans KR",sans-serif}
+.tag{display:inline-block;font-weight:600;font-size:14px;border:2px solid var(--ink);border-radius:999px;padding:2px 12px}
 .opt{display:block;width:100%;text-align:left;font:500 17px "Instrument Sans";color:var(--ink);background:var(--paper);border:2px solid var(--line);border-radius:12px;padding:12px 16px;margin-bottom:10px;cursor:pointer}
 .opt:hover:not(:disabled){border-color:var(--ink)}
-.opt.benar{background:var(--mint);border-color:var(--ink)}
-.opt.salah{background:var(--pink);border-color:var(--ink)}
+.opt.benar{background:var(--mint);border-color:var(--ink)}.opt.salah{background:var(--pink);border-color:var(--ink)}
 .bahas{background:var(--hi);border-radius:12px;padding:12px 16px;margin:14px 0}
 .skor{font:800 64px "Bricolage Grotesque";margin:0}
-footer{padding:40px 0 60px;font-size:15px;opacity:.8}
+.empty{padding:20px;border:2px dashed var(--ink);border-radius:14px}
+footer{padding:40px 0 60px;font-size:15px;opacity:.85}

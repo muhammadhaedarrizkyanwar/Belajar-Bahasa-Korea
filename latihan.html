@@ -1,32 +1,39 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
-<title>Latihan soal | mw belajar...</title>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<title>Latihan | Kkuljaem Korea</title>
 </head><body><div class="wrap">
-<nav><a class="logo" href="index.html">mw belajar...</a><div><a href="index.html">Beranda</a><a href="latihan.html" aria-current="page">Latihan soal</a></div></nav>
-<section><h2>Latihan soal</h2><p class="sub">Pilih jalur, jawab, lalu baca pembahasannya.</p>
-<div class="filters" id="filters" role="group" aria-label="Pilih jalur"></div>
+<nav><a class="logo" href="index.html">Kkuljaem Korea</a><div><a href="index.html">Beranda</a><a href="belajar.html">Belajar</a><a href="latihan.html" aria-current="page">Latihan</a></div></nav>
+<section><h2>Latihan soal</h2><p class="sub">10 soal acak dibuat dari isi pelajaran. Pilih pelajaran yang mau diuji.</p>
+<div class="filters"><label for="pil">Pelajaran:</label><select id="pil"></select></div>
 <div id="area"></div></section></div>
 <script src="data.js"></script>
 <script>
-const filters=document.getElementById("filters"),area=document.getElementById("area");
-const options=["Semua",...new Set(SOAL.map(s=>s.jalur))];
-let jalur=new URLSearchParams(location.search).get("jalur");if(!options.includes(jalur))jalur="Semua";
-let soal=[],i=0,skor=0;
-function mulai(){soal=SOAL.filter(s=>jalur==="Semua"||s.jalur===jalur);i=0;skor=0;tab();tampil()}
-function tab(){filters.innerHTML="";options.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.setAttribute("aria-pressed",o===jalur);b.onclick=()=>{jalur=o;mulai()};filters.appendChild(b)})}
-function el(t,c,x){const e=document.createElement(t);if(c)e.className=c;if(x!==undefined)e.textContent=x;return e}
+var pil=document.getElementById("pil"),area=document.getElementById("area"),S=[],i=0,skor=0;
+pil.appendChild(new Option("Semua pelajaran","semua"));
+PELAJARAN.forEach(function(p){pil.appendChild(new Option(p.judul,p.id))});
+var q0=new URLSearchParams(location.search).get("p");
+if(PELAJARAN.some(function(p){return p.id===q0}))pil.value=q0;
+pil.onchange=mulai;
+function buat(pid){var semua=[];
+PELAJARAN.filter(function(p){return pid==="semua"||p.id===pid}).forEach(function(p){p.baris.forEach(function(b){semua.push({p:p,b:b})})});
+return acak(semua).slice(0,10).map(function(x){var benar=x.b[2];
+var pool=acak(Array.from(new Set(x.p.baris.map(function(r){return r[2]}))).filter(function(a){return a!==benar}));
+if(pool.length<3){var lain=Array.from(new Set([].concat.apply([],PELAJARAN.map(function(p){return p.baris.map(function(r){return r[2]})})))).filter(function(a){return a!==benar&&pool.indexOf(a)<0});pool=pool.concat(acak(lain))}
+var opsi=acak([benar].concat(pool.slice(0,3)));
+return {tipe:x.p.tipe,k:x.b[0],s:x.b[3]||x.b[0],r:x.b[1],a:benar,opsi:opsi,jawab:opsi.indexOf(benar)}})}
+function mulai(){S=buat(pil.value);i=0;skor=0;tampil()}
 function tampil(){area.innerHTML="";
-if(!soal.length){area.appendChild(el("div","empty","Belum ada soal di jalur ini."));return}
-if(i>=soal.length){const q=el("div","quiz");q.append(el("p","","Skor kamu"),el("p","skor",skor+" / "+soal.length));
-const b=el("button","btn","Ulangi");b.onclick=mulai;q.append(b);area.appendChild(q);return}
-const s=soal[i],q=el("div","quiz");
-q.append(el("span","tag",s.jalur+" · soal "+(i+1)+" dari "+soal.length),el("h3","",s.tanya));
-const info=el("div");
-s.opsi.forEach((o,k)=>{const b=el("button","opt",o);b.onclick=()=>{
-q.querySelectorAll(".opt").forEach((x,j)=>{x.disabled=true;if(j===s.jawab)x.classList.add("benar");else if(j===k)x.classList.add("salah")});
+if(i>=S.length){var q=el("div","quiz");q.append(el("p","","Skor kamu"),el("p","skor",skor+" / "+S.length));
+var b=el("button","btn","Ulangi");b.onclick=mulai;q.appendChild(b);area.appendChild(q);return}
+var s=S[i],q=el("div","quiz");
+q.append(el("span","tag","Soal "+(i+1)+" dari "+S.length),el("p","",s.tipe==="Bunyi"?"Bagaimana bunyi huruf ini?":"Apa arti kata/kalimat ini?"));
+var h=el("h3","",s.k),sp=el("button","say","🔊");sp.setAttribute("aria-label","Dengarkan");sp.onclick=function(){bicara(s.s)};h.appendChild(sp);q.appendChild(h);
+var info=el("div");
+s.opsi.forEach(function(o,k){var b=el("button","opt",o);b.onclick=function(){
+q.querySelectorAll(".opt").forEach(function(x,j){x.disabled=true;if(j===s.jawab)x.classList.add("benar");else if(j===k)x.classList.add("salah")});
 if(k===s.jawab)skor++;
-info.append(el("div","bahas",(k===s.jawab?"Benar. ":"Kurang tepat. ")+s.bahas));
-const n=el("button","btn",i+1===soal.length?"Lihat skor":"Soal berikutnya");n.onclick=()=>{i++;tampil()};info.append(n);n.focus()};q.appendChild(b)});
+info.appendChild(el("div","bahas",(k===s.jawab?"Benar. ":"Kurang tepat. ")+s.k+" ("+s.r+") = "+s.a));
+var n=el("button","btn",i+1===S.length?"Lihat skor":"Soal berikutnya");n.onclick=function(){i++;tampil()};info.appendChild(n);n.focus()};q.appendChild(b)});
 q.appendChild(info);area.appendChild(q)}
 mulai();
 </script></body></html>

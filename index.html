@@ -1,31 +1,36 @@
 <!DOCTYPE html>
-<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
-<title>mw belajar...</title>
-<meta name="description" content="Mau belajar PAS? SNBT? TKA? Ayo kesini!">
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<title>Kkuljaem Korea | Belajar Bahasa Korea dari Nol</title>
+<meta name="description" content="Belajar bahasa Korea dari nol sampai bisa: Hangul, kosakata, tata bahasa, dan latihan soal.">
 </head><body><div class="wrap">
-<nav><a class="logo" href="index.html">mw belajar...</a><div><a href="index.html" aria-current="page">Beranda</a><a href="latihan.html">Latihan soal</a></div></nav>
-<header class="hero"><h1>Mau belajar <span class="mark">PAS</span>? SNBT? TKA?</h1>
-<p>Ringkasan materi dan latihan soal, dikumpulkan di satu tempat. Pilih jalurmu, lalu mulai.</p>
-<a class="btn" href="latihan.html">Coba latihan soal</a></header>
-<section id="jalur"><h2>Pilih jalur belajar</h2><p class="sub">Tiga tujuan, tiga cara belajar yang berbeda.</p>
-<div class="tracks">
-<a class="track" href="latihan.html?jalur=PAS"><h3>PAS</h3><p>Penilaian akhir semester: materi kelas yang diujikan di sekolah.</p></a>
-<a class="track" href="latihan.html?jalur=SNBT"><h3>SNBT</h3><p>Tes masuk PTN: penalaran, literasi, dan pengetahuan kuantitatif.</p></a>
-<a class="track" href="latihan.html?jalur=TKA"><h3>TKA</h3><p>Tes kemampuan akademik: mata pelajaran wajib dan pilihan.</p></a>
+<nav><a class="logo" href="index.html">Kkuljaem Korea</a><div><a href="index.html" aria-current="page">Beranda</a><a href="belajar.html">Belajar</a><a href="latihan.html">Latihan</a></div></nav>
+<header class="hero"><small>안녕하세요 여러분</small>
+<h1>Belajar <span class="mark">bahasa Korea</span> dari nol</h1>
+<p>Dari Hangul sampai bisa ngobrol. Pelajaran pendek, ada suara, ada latihan soal, dan progresmu tersimpan otomatis.</p>
+<a class="btn" id="lanjut" href="belajar.html">Mulai belajar</a> <a class="btn alt" href="latihan.html">Latihan soal</a></header>
+<section><h2>Progres belajarmu</h2><p class="sub" id="teks"></p><div class="bar" role="progressbar" aria-label="Progres"><i id="isi" style="width:0"></i></div></section>
+<section><h2>Peta jalan</h2><p class="sub">Urutan belajar dari nol. Lama belajar hanyalah perkiraan, tergantung waktu harianmu.</p>
+<div class="grid">
+<div class="card"><b>LEVEL 0 · 1–2 MINGGU</b><h3>Hangul</h3><p>Vokal, konsonan, vokal gabungan, batchim. Setelah ini kamu bisa membaca apa pun.</p></div>
+<div class="card"><b>LEVEL 1 · 1–2 BULAN</b><h3>Dasar</h3><p>Salam, angka, kosakata, partikel, dan pola kalimat sederhana.</p></div>
+<div class="card"><b>LEVEL 2 · 2–4 BULAN</b><h3>Menengah</h3><p>Kata kerja, bertanya, lampau dan masa depan. Setara persiapan TOPIK I.</p></div>
+<div class="card" style="background:#fff"><b>LEVEL 3 · 6 BULAN+</b><h3>Lanjut</h3><p>Banyak membaca, menonton, dan bicara dengan penutur asli. Menuju TOPIK II.</p></div>
 </div></section>
-<section id="materi"><h2>Materi</h2><p class="sub">Saring berdasarkan jalur.</p>
-<div class="filters" id="filters" role="group" aria-label="Saring materi"></div><div class="list" id="list"></div></section>
-<footer>Dibuat untuk belajar bareng. Semoga lancar ujiannya!</footer></div>
+<section><h2>Tips supaya cepat bisa</h2>
+<div class="grid">
+<div class="card"><h3>20 menit tiap hari</h3><p>Rutin sebentar lebih ampuh daripada belajar lama sekali seminggu.</p></div>
+<div class="card"><h3>Dengar & tirukan</h3><p>Tekan tombol suara di tiap kata, lalu ucapkan keras-keras.</p></div>
+<div class="card"><h3>Tulis tangan</h3><p>Menulis Hangul membantu hafal bentuk huruf lebih cepat.</p></div>
+</div></section>
+<footer>화이팅! 🇰🇷 Semangat belajarnya.</footer></div>
 <script src="data.js"></script>
 <script>
-const filters=document.getElementById("filters"),list=document.getElementById("list");
-const options=["Semua",...new Set(MATERI.map(m=>m.jalur))];let aktif="Semua";
-function render(){filters.innerHTML="";
-options.forEach(o=>{const b=document.createElement("button");b.textContent=o;b.setAttribute("aria-pressed",o===aktif);b.onclick=()=>{aktif=o;render()};filters.appendChild(b)});
-const data=MATERI.filter(m=>aktif==="Semua"||m.jalur===aktif);
-list.innerHTML=data.length?"":'<div class="empty">Belum ada materi di jalur ini.</div>';
-data.forEach(m=>{const a=document.createElement("a");a.className="item";a.href=m.url;
-a.innerHTML='<span><b></b><small></small></span><span class="tag"></span>';
-a.querySelector("b").textContent=m.judul;a.querySelector("small").textContent=m.ket;a.querySelector(".tag").textContent=m.jalur;list.appendChild(a)})}
-render();
+var done=baca().filter(function(id){return PELAJARAN.some(function(p){return p.id===id})});
+var n=done.length,t=PELAJARAN.length;
+document.getElementById("isi").style.width=Math.round(n/t*100)+"%";
+document.getElementById("teks").textContent=n+" dari "+t+" pelajaran selesai.";
+var next=PELAJARAN.find(function(p){return done.indexOf(p.id)<0});
+var b=document.getElementById("lanjut");
+if(n>0&&next){b.textContent="Lanjut: "+next.judul;b.href="belajar.html#"+next.id}
+else if(!next){b.textContent="Semua selesai. Ulangi lewat latihan";b.href="latihan.html"}
 </script></body></html>

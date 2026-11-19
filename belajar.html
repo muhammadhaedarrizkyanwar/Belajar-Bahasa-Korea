@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Instrument+Sans:wght@400;500;600&family=Noto+Sans+KR:wght@500;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="style.css">
+<title>Belajar | Kkuljaem Korea</title>
+</head><body><div class="wrap">
+<nav><a class="logo" href="index.html">Kkuljaem Korea</a><div><a href="index.html">Beranda</a><a href="belajar.html" aria-current="page">Belajar</a><a href="latihan.html">Latihan</a></div></nav>
+<div class="layout"><aside class="menu" id="menu"></aside><main class="lesson" id="pel"></main></div>
+<footer>Tombol 🔊 memakai suara Korea bawaan perangkatmu. Jika tidak bersuara, pasang paket suara Korea di pengaturan HP/komputer.</footer></div>
+<script src="data.js"></script>
+<script>
+var menu=document.getElementById("menu"),pel=document.getElementById("pel");
+function aktifId(){var h=location.hash.slice(1);return PELAJARAN.some(function(p){return p.id===h})?h:PELAJARAN[0].id}
+function buatMenu(a){menu.innerHTML="";var d=baca();
+LEVEL.forEach(function(nm,lv){menu.appendChild(el("p","lv",nm));
+PELAJARAN.filter(function(p){return p.lv===lv}).forEach(function(p){
+var b=el("button","mi",(d.indexOf(p.id)>=0?"✓ ":"")+p.judul);
+if(p.id===a)b.setAttribute("aria-current","true");
+b.onclick=function(){location.hash=p.id};menu.appendChild(b)})})}
+function tampil(){var a=aktifId(),i=PELAJARAN.findIndex(function(p){return p.id===a}),p=PELAJARAN[i];
+buatMenu(a);pel.innerHTML="";
+pel.append(el("h2","",p.judul),el("p","sub",p.ringkas));
+var ul=el("ul");p.catatan.forEach(function(c){ul.appendChild(el("li","",c))});pel.appendChild(ul);
+var w=el("div","scroll"),tb=el("table","tbl"),h=el("tr");
+["Korea","Romanisasi",p.tipe==="Bunyi"?"Bunyi":"Arti"].forEach(function(x){h.appendChild(el("th","",x))});
+tb.appendChild(h);
+p.baris.forEach(function(r){var tr=el("tr"),k=el("td","kor",r[0]),s=el("button","say","🔊");
+s.setAttribute("aria-label","Dengarkan "+r[0]);s.onclick=function(){bicara(r[3]||r[0])};k.appendChild(s);
+tr.append(k,el("td","",r[1]),el("td","",r[2]));tb.appendChild(tr)});
+w.appendChild(tb);pel.appendChild(w);
+var ac=el("div","acts"),d=baca(),sel=d.indexOf(p.id)>=0;
+var m=el("button","btn",sel?"✓ Selesai (klik untuk batal)":"Tandai selesai");
+m.onclick=function(){var x=baca();var j=x.indexOf(p.id);if(j>=0)x.splice(j,1);else x.push(p.id);simpan(x);tampil()};
+var l=el("a","btn alt","Latihan pelajaran ini");l.href="latihan.html?p="+p.id;
+ac.append(m,l);
+if(PELAJARAN[i+1]){var nx=el("a","btn alt","Berikutnya →");nx.href="#"+PELAJARAN[i+1].id;ac.appendChild(nx)}
+pel.appendChild(ac)}
+window.addEventListener("hashchange",function(){tampil();window.scrollTo(0,0)});
+tampil();
+</script></body></html>
